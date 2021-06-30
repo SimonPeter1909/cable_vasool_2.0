@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "752301771250",
+    "firebase_url": "https://cablevasul.firebaseio.com",
+    "project_id": "cablevasul",
+    "storage_bucket": "cablevasul.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752301771250:android:240e96908144ecb0f3436b",
+        "android_client_info": {
+          "package_name": "com.fidbee.cable_vasool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752301771250-i19u2j8a25jm54tnk2mj7qthgsaf1892.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidbee.cable_vasool",
+            "certificate_hash": "49f91c00502217450abca9bb719d035fda44329a"
+          }
+        },
+        {
+          "client_id": "752301771250-pla1kqae7qemn96dciqoi03lp6dqb7a6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fidbee.cable_vasool",
+            "certificate_hash": "b86406c62650ecdd0cf987deef4534a046b6a1b2"
+          }
+        },
+        {
+          "client_id": "752301771250-fek5n805ler7sb332qo459mkiagd1067.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLzVlawZaLHi8UGx-k8vIgy8vss6DGehg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752301771250-fek5n805ler7sb332qo459mkiagd1067.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "752301771250-saunbp19slhqbc060l3m2cftoa6bnhob.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fidbee.cablevasool"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
