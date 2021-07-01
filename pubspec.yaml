@@ -93,6 +93,7 @@ flutter:
     - assets/images/splash_image.png
     - assets/images/verified.png
     - assets/lottie/loading.json
+    - assets/lottie/sending_sms.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

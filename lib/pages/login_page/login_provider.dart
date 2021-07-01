@@ -1,16 +1,19 @@
+import 'package:cable_vasool/api/api_provider.dart';
 import 'package:cable_vasool/app_enums.dart';
+import 'package:cable_vasool/models/general_response_model.dart';
 import 'package:cable_vasool/utils/app_flash_bar.dart';
 import 'package:cable_vasool/utils/flutter_toast.dart';
+import 'package:cable_vasool/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginProvider with ChangeNotifier {
-  LoginScreenState _currentState = LoginScreenState.mobileNumber;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
-  LoginScreenState get currentState => _currentState;
+  LoginScreenState currentState = LoginScreenState.mobileNumber;
 
-  set currentState(LoginScreenState value) {
-    _currentState = value;
+  void setCurrentState(LoginScreenState value) {
+    currentState = value;
     notifyListeners();
   }
 
@@ -26,15 +29,37 @@ class LoginProvider with ChangeNotifier {
     } else if (mobileNumberCntlr.text.length != 10) {
       ToastUtils.showToast("Please Enter a Proper Mobile Number");
     } else {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+44 7123 123 456',
-        verificationCompleted: (PhoneAuthCredential credential) {},
-        verificationFailed: (FirebaseAuthException e) {},
-        codeSent: (String verificationId, int? resendToken) {
-          
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {},
-      );
+      checkNumber();
     }
+  }
+
+  void checkNumber() async {
+    setCurrentState(LoginScreenState.checkingMobileNumber);
+    GeneralResponseModel? model =
+        await ApiProvider.checkPhoneNumber(mobileNumberCntlr.text);
+    if (model == null) {
+      setCurrentState(LoginScreenState.error);
+    } else {
+      sendOtp();
+    }
+  }
+
+  void sendOtp() async {
+    setCurrentState(LoginScreenState.sendingSMS);
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+91${mobileNumberCntlr.text}',
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        ///Android Only
+        UserCredential userCredential =
+            await auth.signInWithCredential(credential);
+        setCurrentState(LoginScreenState.verified);
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        logger.e("Verification Failed", e);
+        setCurrentState(LoginScreenState.verificationFailed);
+      },
+      codeSent: (String verificationId, int? resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
+    );
   }
 }

@@ -1,10 +1,11 @@
 import 'package:cable_vasool/app_enums.dart';
-import 'package:cable_vasool/config/app_colors.dart';
 import 'package:cable_vasool/pages/login_page/login_provider.dart';
 import 'package:cable_vasool/res.dart';
 import 'package:cable_vasool/widgets/app_button.dart';
+import 'package:cable_vasool/widgets/app_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,11 +33,21 @@ class _LoginPageState extends State<LoginPage> {
             case LoginScreenState.mobileNumber:
               return _MobileNumberState();
             case LoginScreenState.checkingMobileNumber:
+              return LoaderWidget();
+            case LoginScreenState.error:
               return SizedBox();
             case LoginScreenState.notRegistered:
               return SizedBox();
             case LoginScreenState.sendingSMS:
-              return SizedBox();
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Lottie.asset(Res.sending_sms),
+                    Text("Sending SMS... Please Wait..."),
+                  ],
+                ),
+              );
             case LoginScreenState.otpScreen:
               return SizedBox();
             case LoginScreenState.verified:
